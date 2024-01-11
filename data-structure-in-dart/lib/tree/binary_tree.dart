@@ -42,23 +42,24 @@ class BinaryTreeNode<T> {
     }
   }
 
+  void forEachDepthFirstWithNull(void Function(T?) action) {
+    action(this.value);
+
+    this.left == null
+        ? action(null)
+        : this.left?.forEachDepthFirstWithNull(action);
+
+    this.right == null
+        ? action(null)
+        : this.right?.forEachDepthFirstWithNull(action);
+  }
+
   List<T?> serialize() {
-    final list = <BinaryTreeNode<T>?>[this];
+    final list = <T?>[];
 
-    int i = 0;
+    this.forEachDepthFirstWithNull((val) => list.add(val));
 
-    while (i < list.length) {
-      final node = list[i++];
-
-      if (node == null) {
-        continue;
-      }
-
-      list.add(node.left);
-      list.add(node.right);
-    }
-
-    return list.map((e) => e?.value).toList();
+    return list;
   }
 
   int get treeDepth => _treeDepthHelper(this);
@@ -69,49 +70,19 @@ class BinaryTreeNode<T> {
     return 1 + max(_treeDepthHelper(node.left), _treeDepthHelper(node.right));
   }
 
-  // FIXME: Optimize acc to the solution
-  static BinaryTreeNode<T> deserialize<T>(List<T?> list) {
-    if (list.first == null) throw Exception("Invalid list");
+  BinaryTreeNode<T>? deserialize(List<T?> list) {
+    if (list.isEmpty) return null;
 
-    final root = BinaryTreeNode<T>(list.first as T);
+    final value = list.removeAt(0);
 
-    helper(BinaryTreeNode<T> node, int nonNullCount) {
-      int li = 2 * nonNullCount + 1;
-      int ri = 2 * nonNullCount + 2;
+    if (value == null) return null;
 
-      final leftVal = list[li];
-      final rightVal = list[ri];
+    final node = BinaryTreeNode(value);
 
-      if (leftVal != null) {
-        final left = BinaryTreeNode(leftVal);
-        node.left = left;
+    node.left = deserialize(list);
+    node.right = deserialize(list);
 
-        // adjust NNC
-        int nnc = nonNullCount;
-        for (var i = nonNullCount; i < li; i++) {
-          if (list[i] != null) nnc++;
-        }
-
-        helper(left, nnc);
-      }
-
-      if (rightVal != null) {
-        final right = BinaryTreeNode(rightVal);
-        node.right = right;
-
-        // adjust NNC
-        int nnc = nonNullCount;
-        for (var i = nonNullCount; i < ri; i++) {
-          if (list[i] != null) nnc++;
-        }
-
-        helper(right, nnc);
-      }
-    }
-
-    helper(root, 0);
-
-    return root;
+    return node;
   }
 
   @override
