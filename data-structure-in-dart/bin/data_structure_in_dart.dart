@@ -40,4 +40,6 @@ void main(List<String> arguments) {
 
   print(bst.root?.isBST());
   print(three.isBST());
+
+  print(three.isIdenticalTo(three));
 }
