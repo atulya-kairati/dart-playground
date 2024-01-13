@@ -42,4 +42,6 @@ void main(List<String> arguments) {
   print(three.isBST());
 
   print(three.isIdenticalTo(three));
+
+  print(bst.root?.left.isSubSetOf(three));
 }
