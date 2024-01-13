@@ -1,10 +1,8 @@
-
 import 'package:data_structure_in_dart/tree/binary_tree.dart';
 
 // we constrain T to be a comparable type
 // since elements in BST need to be compared
 class BinarySearchTree<T extends Comparable> {
-
   BinaryTreeNode<T>? root;
 
   @override
@@ -15,13 +13,13 @@ class BinarySearchTree<T extends Comparable> {
   }
 
   BinaryTreeNode<T>? _insertAt(BinaryTreeNode<T>? node, T value) {
-
     if (node == null) return BinaryTreeNode(value);
 
-    if (value.compareTo(node.value) < 0) { // value < node.value
+    if (value.compareTo(node.value) < 0) {
+      // value < node.value
       node.left = _insertAt(node.left, value);
-    }
-    else { // value >= node.value
+    } else {
+      // value >= node.value
       node.right = _insertAt(node.right, value);
     }
 
@@ -33,15 +31,14 @@ class BinarySearchTree<T extends Comparable> {
     var ptr = root;
 
     while (ptr != null) {
-
       if (ptr.value == value) return true;
 
-      if (value.compareTo(ptr.value) < 0) { // value < node.value
+      if (value.compareTo(ptr.value) < 0) {
+        // value < node.value
         ptr = ptr.left;
       } else {
         ptr = ptr.right;
       }
-
     }
 
     return false;
@@ -52,9 +49,9 @@ class BinarySearchTree<T extends Comparable> {
   }
 
   BinaryTreeNode<T>? _removeAt(BinaryTreeNode<T>? node, T value) {
-
     if (node == null) return null;
 
+    // when the node is found
     if (node.value == value) {
       // delete node
 
@@ -66,19 +63,18 @@ class BinarySearchTree<T extends Comparable> {
       if (node.left != null && node.right == null) return node.left;
 
       // if both children present
-      // find min in the right subtree and 
+      // find min in the right subtree and
       // assign it to the current node value
       // the delete the min in right subtree
       final rightTreeMin = node.right!.min!;
       node.value = rightTreeMin.value;
       node.right = _removeAt(node.right, rightTreeMin.value);
     }
-
     // recursively search and delete in the sub trees
-    if (value.compareTo(node.value) < 0) { // value < node.value
+    else if (value.compareTo(node.value) < 0) {
+      // value < node.value
       node.left = _removeAt(node.left, value);
-    }
-    else {
+    } else {
       node.right = _removeAt(node.right, value);
     }
 

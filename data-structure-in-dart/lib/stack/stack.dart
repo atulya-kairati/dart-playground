@@ -1,5 +1,5 @@
 import 'package:data_structure_in_dart/stack/abstract_stack.dart';
-import 'package:data_structure_in_dart/utils/iteratorUtils.dart';
+import 'package:data_structure_in_dart/utils/iterator_utils.dart';
 
 class Stack<T> extends AbstractStack<T> {
   Stack() : _storage = <T>[];
