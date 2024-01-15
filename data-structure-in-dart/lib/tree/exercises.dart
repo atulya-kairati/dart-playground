@@ -1,6 +1,6 @@
 import 'dart:collection';
 
-import 'package:data_structure_in_dart/tree/binary_tree.dart';
+import 'package:data_structure_in_dart/tree/binary_tree/binary_tree.dart';
 
 extension Checker<T extends num> on BinaryTreeNode<T>? {
   /// check is a binary tree is BST or not

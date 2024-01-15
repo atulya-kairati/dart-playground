@@ -1,4 +1,4 @@
-import 'package:data_structure_in_dart/tree/binary_tree.dart';
+import 'package:data_structure_in_dart/tree/binary_tree/binary_tree.dart';
 
 // we constrain T to be a comparable type
 // since elements in BST need to be compared

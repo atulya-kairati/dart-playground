@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_interpolation_to_compose_strings, prefer_adjacent_string_concatenation
 
-import 'package:data_structure_in_dart/tree/binary_search_tree.dart';
-import 'package:data_structure_in_dart/tree/binary_tree.dart';
-import 'package:data_structure_in_dart/tree/using_bst.dart';
+import 'package:data_structure_in_dart/tree/binary_search_tree/binary_search_tree.dart';
+import 'package:data_structure_in_dart/tree/binary_tree/binary_tree.dart';
+import 'package:data_structure_in_dart/tree/exercises.dart';
 
 void main(List<String> arguments) {
   final bst = BinarySearchTree<int>();
